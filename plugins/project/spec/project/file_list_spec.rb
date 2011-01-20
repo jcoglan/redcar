@@ -5,7 +5,7 @@ FileList = Redcar::Project::FileList
 
 describe FileList do
   def fixture_path
-    File.expand_path(File.join(File.dirname(__FILE__), *%w".. fixtures myproject"))
+    File.expand_path(File.join(File.dirname(__FILE__), *%w".. .. fixtures myproject"))
   end
   
   def relative_path(*path)
@@ -33,6 +33,7 @@ describe FileList do
 
     it "should return a list of files in a symlinked directory" do
       @file_list.all_files.include?(relative_path("lib_symlink", "foo_lib.rb")).should be_true
+      @file_list.all_files.include?(relative_path("lib", "foo", "loopback_symlink", "spec", "foo_spec.rb")).should be_true
     end
   end
   
